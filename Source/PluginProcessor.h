@@ -57,10 +57,7 @@ public:
     // get the scale array from harmonize scale text label and declare the variable here
     std::vector <int> user_input_scale_vector{ 0, 2, 3, 5, 7, 8, 11 }; // just declaring a default scale if none has been inputted yet 
 
-    // PERHAPS COULD DITCH # OF OCTAVES STUFF...
-    int num_octaves_scale_spans = 1;
     int min_note_of_scale = 0;
-    int tot_chromatic_span_of_scale = 0;
     int min_note_lowest_octave_rep = 0;
 
     std::vector <int> user_input_interval_vector{ 3, 7, 11 }; // just declaring default intervals if none has been inputted yet

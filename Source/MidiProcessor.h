@@ -23,9 +23,7 @@ public:
 	// so would just add these values to the original note to come up with the harmonized note, 
 	// don't have to worry about coming up with the octave here because will be determined relatively from the original note
 	std::vector<int> scale;
-	int num_octaves; // NOT SURE THAT YOU NEED ANYMORE...
 	int min_note_of_scale = 0;
-	int tot_chromatic_span_of_scale = 0;
 	int min_note_lowest_octave_rep = 0;
 
 	// finds actual scale index if the note value exists in the scale vector, otherwise finds closest note in scale, 
@@ -112,8 +110,6 @@ public:
 				//auto transposedMessage2 = currentMessage; // just for debugging
 				auto oldNoteNum = transposedMessage.getNoteNumber();
 
-				// THINK YOU CAN GET RID OF BECAUSE DISCARDING ANYTHING THAT THE USER INPUTTED THAT IS MORE THAN AN OCTAVE AWAY FROM THE MINIMUM NOTE INPUTTED
-				// well need to account for how many octaves the scale spans, not just the lowest octave representation
 				int orig_note_lowest_octave_rep = oldNoteNum;
 				
 				// decrease octave representation of original note as far as you can
@@ -121,14 +117,8 @@ public:
 					orig_note_lowest_octave_rep -= 12;
 				}
 
-				
-				// PERHAPS DON'T NEED BECAUSE DISCARDING ANYTHING THAT THE USER INPUTTED THAT IS MORE THAN AN OCTAVE AWAY FROM THE MINIMUM NOTE INPUTTED
-				int dist_from_min_note = orig_note_lowest_octave_rep - min_note_lowest_octave_rep;
-				int num_octaves_from_min_note = dist_from_min_note / 12;
-
-
 				// you will have subtracted 12 one too many times when the while loop ends
-				orig_note_lowest_octave_rep += 12 * (num_octaves_from_min_note + 1);
+				orig_note_lowest_octave_rep += 12;
 
 				// check if new representation is lower than the min_note for situations like 
 				// 1, 2, 3, 5, 7, 8, 10, 12, 14 -> 1, 2, 3, 5, 7, 8, 10, 0, 14

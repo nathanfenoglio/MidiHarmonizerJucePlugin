@@ -139,13 +139,8 @@ void MidiEffectAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         midiProcessor.scale = user_input_scale_vector;
     }
 
-    // PERHAPS COULD DITCH # OF OCTAVES STUFF...
-    if (num_octaves_scale_spans > 0) {
-        midiProcessor.num_octaves = num_octaves_scale_spans;
-        midiProcessor.min_note_of_scale = min_note_of_scale;
-        midiProcessor.tot_chromatic_span_of_scale = tot_chromatic_span_of_scale;
-        midiProcessor.min_note_lowest_octave_rep = min_note_lowest_octave_rep;
-    }
+    midiProcessor.min_note_of_scale = min_note_of_scale;
+    midiProcessor.min_note_lowest_octave_rep = min_note_lowest_octave_rep;
 
     // check if size is > 0 so if no input, then uses default intervals specified in header file
     if (user_input_interval_vector.size() > 0) {

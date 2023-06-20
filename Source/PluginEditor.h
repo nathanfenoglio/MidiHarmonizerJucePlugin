@@ -28,11 +28,7 @@ public:
     // to hold the scale that will be used to harmonize converted from the user input from harmonyScaleInputText
     std::vector <int> scale_from_input_text;
 
-    // MAYBE DON'T NEED TO WORRY ABOUT DETERMINING HOW MANY OCTAVES ANY LONGER...
-    // # of octaves that the scale spans
-    int num_octaves = 0;
     int min_note = 0;
-    int tot_chromatic_span_of_scale = 0;
     int min_note_lowest_octave_rep = 0;
 
     // to hold the intervals (like 3rd, 7th, 9th etc) for the harmonized notes

@@ -119,16 +119,13 @@ void MidiEffectAudioProcessorEditor::translate_scale_to_lowest_octave(std::vecto
             continue;
         }
 
-        // PERHAPS DO NOT NEED TO COUNT OCTAVES ANY MORE...
-        int num_octaves_from_min_note = dist_from_min_note / 12;
-
         int lowest_octave_rep = orig_scale_rep[i];
         while (lowest_octave_rep >= 0) {
             lowest_octave_rep -= 12;
         }
 
         // you will have subtracted 12 one too many times when the while loop ends
-        lowest_octave_rep += 12 * (num_octaves_from_min_note + 1);
+        lowest_octave_rep += 12;
 
         // check if new representation is lower than the min_note for situations like 
         // 1, 2, 3, 5, 7, 8, 10, 12, 14 -> 1, 2, 3, 5, 7, 8, 10, 0, 14
@@ -146,17 +143,11 @@ void MidiEffectAudioProcessorEditor::scaleInputTextChanged() {
     scale_from_input_text = parseCommaSeparatedIntegers(harmonyScaleInputText.getText());
 
     // SHOULD REFACTOR AS A SEPARATE FUNCTION...
-    // MAYBE DON'T NEED TO WORRY ABOUT DETERMINING HOW MANY OCTAVES ANY LONGER...
-    // need to determine how many octaves the scale spans
     auto min_note_ptr = std::min_element(scale_from_input_text.begin(), scale_from_input_text.end());
     min_note = *min_note_ptr;
     auto max_note_ptr = std::max_element(scale_from_input_text.begin(), scale_from_input_text.end());
     int max_note = *max_note_ptr;
-    tot_chromatic_span_of_scale = max_note - min_note;
-    num_octaves = (tot_chromatic_span_of_scale / 12) + 1;
-    audioProcessor.num_octaves_scale_spans = num_octaves;
     audioProcessor.min_note_of_scale = min_note;
-    audioProcessor.tot_chromatic_span_of_scale = tot_chromatic_span_of_scale;
 
     std::vector <int> scale_from_input_only_one_octave;
     for (int i = 0; i < scale_from_input_text.size(); i++) {
